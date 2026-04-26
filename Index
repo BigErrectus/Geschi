@@ -1,945 +1,194 @@
-<!DOCTYPE html>
-
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lernzettel Geschichte – Weimarer Republik & NS-Aufstieg</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #1a1410;
-    --surface: #231e18;
-    --surface2: #2d2720;
-    --gold: #c9a84c;
-    --gold-light: #e2c97e;
-    --red: #a83232;
-    --red-light: #c94545;
-    --green: #3a7a5a;
-    --green-light: #4e9e76;
-    --text: #e8dfc8;
-    --text-muted: #a09070;
-    --border: #3d3428;
-  }
-
-- { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: ‘Source Serif 4’, Georgia, serif;
-font-size: 15px;
-line-height: 1.75;
-padding: 2rem 1rem;
-}
-
-.page { max-width: 860px; margin: 0 auto; }
-
-/* HEADER */
-header {
-text-align: center;
-padding: 3rem 2rem 2.5rem;
-border: 1px solid var(–border);
-background: var(–surface);
-margin-bottom: 2.5rem;
-position: relative;
-overflow: hidden;
-}
-header::before {
-content: ‘’;
-position: absolute;
-inset: 0;
-background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 70%);
-pointer-events: none;
-}
-.label {
-font-size: 0.72rem;
-letter-spacing: 0.25em;
-text-transform: uppercase;
-color: var(–gold);
-margin-bottom: 0.75rem;
-font-family: ‘Source Serif 4’, serif;
-font-weight: 300;
-}
-h1 {
-font-family: ‘Playfair Display’, Georgia, serif;
-font-size: clamp(1.6rem, 4vw, 2.6rem);
-font-weight: 900;
-color: var(–gold-light);
-line-height: 1.2;
-margin-bottom: 0.5rem;
-}
-.subtitle {
-color: var(–text-muted);
-font-size: 0.9rem;
-font-style: italic;
-margin-top: 0.75rem;
-}
-.gold-line {
-width: 60px;
-height: 2px;
-background: var(–gold);
-margin: 1rem auto;
-}
-
-/* ── PROGRESS WIDGET ── */
-.progress-widget {
-background: var(–surface);
-border: 1px solid var(–border);
-margin-bottom: 2.5rem;
-overflow: hidden;
-}
-.pw-header {
-padding: 1rem 1.75rem;
-border-bottom: 1px solid var(–border);
-background: rgba(201,168,76,0.04);
-display: flex;
-align-items: center;
-justify-content: space-between;
-flex-wrap: wrap;
-gap: 0.75rem;
-}
-.pw-title {
-font-family: ‘Playfair Display’, serif;
-font-size: 1rem;
-font-weight: 700;
-color: var(–gold-light);
-}
-.pw-right {
-display: flex;
-align-items: center;
-gap: 0.75rem;
-}
-.pw-bar-bg {
-width: 160px;
-height: 6px;
-background: var(–border);
-border-radius: 3px;
-overflow: hidden;
-}
-.pw-bar-fill {
-height: 100%;
-width: 0%;
-background: linear-gradient(90deg, var(–gold), var(–gold-light));
-border-radius: 3px;
-transition: width 0.4s ease;
-}
-.pw-pct {
-font-size: 0.82rem;
-font-weight: 700;
-color: var(–gold);
-min-width: 2.8rem;
-text-align: right;
-}
-.pw-reset {
-font-size: 0.72rem;
-color: var(–text-muted);
-background: none;
-border: 1px solid var(–border);
-padding: 0.2rem 0.6rem;
-cursor: pointer;
-font-family: inherit;
-transition: color 0.2s, border-color 0.2s;
-}
-.pw-reset:hover { color: var(–text); border-color: var(–text-muted); }
-
-.pw-topics {
-padding: 1.1rem 1.75rem 0.5rem;
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-gap: 0.3rem 1rem;
-}
-.tc {
-display: flex;
-align-items: flex-start;
-gap: 0.55rem;
-cursor: pointer;
-padding: 0.35rem 0.4rem;
-transition: background 0.15s;
-user-select: none;
-border-radius: 2px;
-}
-.tc:hover { background: rgba(201,168,76,0.05); }
-.tc input[type=“checkbox”] {
-appearance: none;
--webkit-appearance: none;
-width: 15px;
-height: 15px;
-min-width: 15px;
-border: 1px solid var(–border);
-background: var(–surface2);
-cursor: pointer;
-position: relative;
-margin-top: 0.28rem;
-transition: background 0.18s, border-color 0.18s;
-flex-shrink: 0;
-}
-.tc input[type=“checkbox”]:checked {
-background: var(–green);
-border-color: var(–green-light);
-}
-.tc input[type=“checkbox”]:checked::after {
-content: ‘✓’;
-position: absolute;
-inset: 0;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 10px;
-color: #fff;
-font-weight: 700;
-line-height: 15px;
-text-align: center;
-}
-.tc-label {
-font-size: 0.84rem;
-color: var(–text-muted);
-line-height: 1.45;
-transition: color 0.2s;
-}
-.tc.done .tc-label {
-color: var(–green-light);
-text-decoration: line-through;
-text-decoration-color: rgba(78,158,118,0.4);
-}
-.pw-summary {
-padding: 0.55rem 1.75rem 0.9rem;
-font-size: 0.8rem;
-color: var(–text-muted);
-font-style: italic;
-border-top: 1px solid var(–border);
-margin-top: 0.5rem;
-}
-
-/* SECTION */
-.section {
-background: var(–surface);
-border: 1px solid var(–border);
-margin-bottom: 2rem;
-overflow: hidden;
-}
-.section-header {
-padding: 1.1rem 1.75rem;
-display: flex;
-align-items: center;
-gap: 1rem;
-border-bottom: 1px solid var(–border);
-}
-.section-header.weimar      { background: rgba(201,168,76,0.07); }
-.section-header.ns          { background: rgba(168,50,50,0.10); }
-.section-header.zusammenhang{ background: rgba(58,122,90,0.08); }
-
-.section-num {
-font-family: ‘Playfair Display’, serif;
-font-size: 2rem;
-font-weight: 700;
-line-height: 1;
-opacity: 0.35;
-}
-.section-header.weimar       .section-num { color: var(–gold); }
-.section-header.ns           .section-num { color: var(–red-light); }
-.section-header.zusammenhang .section-num { color: var(–green-light); }
-
-.section-title {
-font-family: ‘Playfair Display’, serif;
-font-size: 1.25rem;
-font-weight: 700;
-}
-.section-header.weimar       .section-title { color: var(–gold-light); }
-.section-header.ns           .section-title { color: #e07070; }
-.section-header.zusammenhang .section-title { color: var(–green-light); }
-
-.section-body { padding: 1.5rem 1.75rem; }
-
-.subsection { margin-bottom: 1.75rem; }
-.subsection:last-child { margin-bottom: 0; }
-
-h3 {
-font-family: ‘Playfair Display’, serif;
-font-size: 1rem;
-font-weight: 700;
-margin-bottom: 0.6rem;
-padding-bottom: 0.35rem;
-border-bottom: 1px solid var(–border);
-}
-.weimar      h3 { color: var(–gold);       border-color: rgba(201,168,76,0.2); }
-.ns-body     h3 { color: var(–red-light);  border-color: rgba(168,50,50,0.25); }
-.zusammen-body h3 { color: var(–green-light); border-color: rgba(58,122,90,0.25); }
-
-p { margin-bottom: 0.6rem; color: var(–text); }
-p:last-child { margin-bottom: 0; }
-
-/* FACTOR CARDS */
-.factor-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 1rem;
-margin: 1rem 0;
-}
-.factor-card {
-padding: 1rem 1.1rem;
-border: 1px solid;
-position: relative;
-}
-.factor-card.destab { border-color: rgba(168,50,50,0.4); background: rgba(168,50,50,0.05); }
-.factor-card.stab   { border-color: rgba(58,122,90,0.4);  background: rgba(58,122,90,0.05); }
-.factor-card-label {
-font-size: 0.65rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-font-weight: 600;
-margin-bottom: 0.5rem;
-}
-.factor-card.destab .factor-card-label { color: var(–red-light); }
-.factor-card.stab   .factor-card-label { color: var(–green-light); }
-.factor-card h4 {
-font-family: ‘Playfair Display’, serif;
-font-size: 0.95rem;
-margin-bottom: 0.4rem;
-color: var(–text);
-}
-.factor-card p { font-size: 0.87rem; color: var(–text-muted); margin: 0; line-height: 1.6; }
-
-/* TIMELINE */
-.timeline {
-margin: 0.75rem 0;
-position: relative;
-padding-left: 1.5rem;
-border-left: 2px solid rgba(168,50,50,0.3);
-}
-.tl-item { margin-bottom: 1.1rem; position: relative; }
-.tl-item::before {
-content: ‘’;
-position: absolute;
-left: -1.6rem; top: 0.45rem;
-width: 8px; height: 8px;
-border-radius: 50%;
-background: var(–red-light);
-border: 2px solid var(–bg);
-}
-.tl-year {
-font-family: ‘Playfair Display’, serif;
-font-size: 0.8rem;
-font-weight: 700;
-color: var(–red-light);
-letter-spacing: 0.05em;
-margin-bottom: 0.1rem;
-}
-.tl-text { font-size: 0.9rem; color: var(–text); line-height: 1.6; }
-.tl-text strong { color: var(–text); font-weight: 600; }
-
-/* KEY TERMS */
-.keyterms { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0; }
-.kt {
-background: rgba(201,168,76,0.08);
-border: 1px solid rgba(201,168,76,0.25);
-color: var(–gold-light);
-font-size: 0.8rem;
-padding: 0.25rem 0.75rem;
-font-style: italic;
-}
-
-/* HIGHLIGHT BOX */
-.highlight {
-border-left: 3px solid;
-padding: 0.75rem 1rem;
-margin: 0.75rem 0;
-font-size: 0.9rem;
-line-height: 1.65;
-}
-.highlight.gold  { border-color: var(–gold);       background: rgba(201,168,76,0.06); color: var(–gold-light); }
-.highlight.red   { border-color: var(–red-light);  background: rgba(168,50,50,0.06);  color: #e07070; }
-.highlight.green { border-color: var(–green-light);background: rgba(58,122,90,0.07);  color: var(–green-light); }
-
-/* ARROW CHAIN */
-.chain {
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-gap: 0.4rem;
-margin: 0.75rem 0;
-font-size: 0.85rem;
-}
-.chain-item { background: var(–surface2); border: 1px solid var(–border); padding: 0.3rem 0.7rem; color: var(–text); }
-.chain-arrow { color: var(–gold); font-size: 1rem; }
-
-/* DIVIDER */
-.divider { border: none; border-top: 1px solid var(–border); margin: 1.25rem 0; }
-
-/* MERKE BOX */
-.merke {
-background: rgba(201,168,76,0.06);
-border: 1px solid rgba(201,168,76,0.3);
-padding: 1rem 1.25rem;
-margin: 1rem 0;
-}
-.merke-label {
-font-size: 0.68rem;
-letter-spacing: 0.2em;
-text-transform: uppercase;
-color: var(–gold);
-font-weight: 600;
-margin-bottom: 0.4rem;
-}
-.merke p { font-size: 0.9rem; color: var(–text); }
-
-/* ── DATA TABLES (only where they genuinely help) ── */
-.table-caption {
-font-size: 0.75rem;
-color: var(–text-muted);
-font-style: italic;
-margin-bottom: 0.4rem;
-margin-top: 0.8rem;
-}
-.data-table {
-width: 100%;
-border-collapse: collapse;
-margin: 0.25rem 0 0.9rem;
-font-size: 0.85rem;
-}
-.data-table th {
-text-align: left;
-padding: 0.45rem 0.75rem;
-font-family: ‘Playfair Display’, serif;
-font-weight: 700;
-font-size: 0.78rem;
-letter-spacing: 0.04em;
-border-bottom: 1px solid;
-white-space: nowrap;
-}
-.data-table.gold-table th { color: var(–gold);      border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.05); }
-.data-table.red-table  th { color: var(–red-light); border-color: rgba(168,50,50,0.35); background: rgba(168,50,50,0.06); }
-.data-table td {
-padding: 0.4rem 0.75rem;
-border-bottom: 1px solid var(–border);
-color: var(–text);
-vertical-align: middle;
-}
-.data-table tr:last-child td { border-bottom: none; }
-.data-table tr:hover td { background: rgba(255,255,255,0.015); }
-.data-table .yr  { font-family: ‘Playfair Display’, serif; font-weight: 700; color: var(–text-muted); white-space: nowrap; }
-.data-table .pct { font-weight: 700; color: var(–red-light); white-space: nowrap; }
-.data-table .note{ font-size: 0.78rem; color: var(–text-muted); font-style: italic; }
-
-/* mini bar inside table */
-.mini-bar-bg   { height: 7px; background: var(–border); border-radius: 4px; overflow: hidden; min-width: 80px; }
-.mini-bar-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(–red), var(–red-light)); }
-
-/* FOOTER */
-footer {
-text-align: center;
-padding: 1.5rem;
-color: var(–text-muted);
-font-size: 0.8rem;
-font-style: italic;
-border-top: 1px solid var(–border);
-margin-top: 2.5rem;
-}
-
-strong { font-weight: 600; }
-em { font-style: italic; color: var(–text-muted); }
-ul { margin: 0.4rem 0 0.4rem 1.2rem; color: var(–text); }
-li { margin-bottom: 0.3rem; font-size: 0.9rem; line-height: 1.6; }
-
-@media (max-width: 600px) {
-.factor-grid   { grid-template-columns: 1fr; }
-.pw-topics     { grid-template-columns: 1fr; }
-.pw-bar-bg     { width: 100px; }
-.data-table    { font-size: 0.8rem; }
-.data-table th,
-.data-table td { padding: 0.35rem 0.5rem; }
-}
-</style>
-
-</head>
-<body>
-<div class="page">
-
-  <!-- HEADER -->
-
-  <header>
-    <div class="label">Lernzettel · Geschichte · Klausur</div>
-    <h1>Weimarer Republik &amp;<br>Aufstieg des Nationalsozialismus</h1>
-    <div class="gold-line"></div>
-    <div class="subtitle">Stabilisierende &amp; destabilisierende Faktoren 1918–1934 · Ziel: 11–12 Punkte</div>
-  </header>
-
-  <!-- ── LERNFORTSCHRITT ── -->
-
-  <div class="progress-widget">
-    <div class="pw-header">
-      <div class="pw-title">⚑ Mein Lernfortschritt</div>
-      <div class="pw-right">
-        <div class="pw-bar-bg"><div class="pw-bar-fill" id="pwFill"></div></div>
-        <div class="pw-pct" id="pwPct">0 %</div>
-        <button class="pw-reset" onclick="resetProgress()">Zurücksetzen</button>
-      </div>
-    </div>
-    <div class="pw-topics" id="pwTopics"></div>
-    <div class="pw-summary" id="pwSummary">Hake ab, was du sicher beherrschst.</div>
-  </div>
-
-  <!-- TEIL 1: WEIMARER REPUBLIK -->
-
-  <div class="section">
-    <div class="section-header weimar">
-      <div class="section-num">01</div>
-      <div>
-        <div class="section-title">Die Weimarer Republik (1918–1933)</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Stabilisierende &amp; destabilisierende Faktoren</div>
-      </div>
-    </div>
-    <div class="section-body weimar">
-
-```
-  <div class="subsection">
-    <h3>Entstehung &amp; Gründungskrise (1918/19)</h3>
-    <p>Das Deutsche Kaiserreich verlor den Ersten Weltkrieg. Am <strong>9. November 1918</strong> dankte Kaiser Wilhelm II. ab – Philipp Scheidemann rief die <strong>Republik</strong> aus. Damit entstand die Weimarer Republik unter denkbar schlechten Vorzeichen: Kriegsniederlage, wirtschaftliche Not und politisches Chaos prägten die Gründungsphase.</p>
-    <div class="highlight gold">
-      <strong>„Novemberverbrecher"-Mythos:</strong> Konservative und Militärs schufen die Legende, die Republik sei durch einen „Dolchstoß" aus dem Innern entstanden – nicht durch militärische Niederlage. Das belastete die Republik von Anfang an und lieferte der Rechten dauerhaft Propaganda-Material.
-    </div>
-    <p>Die neue Regierung unter Friedrich Ebert (SPD) schloss den <strong>Versailler Vertrag (1919)</strong> – eine schwere Hypothek für die junge Demokratie:</p>
-
-    <p class="table-caption">Versailler Vertrag 1919 – die vier zentralen Bestimmungen</p>
-    <table class="data-table gold-table">
-      <thead>
-        <tr><th>Bereich</th><th>Konkrete Regelung</th><th>Folge für die Republik</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Kriegsschuld</strong></td>
-          <td>§ 231 – Deutschland allein schuldig</td>
-          <td class="note">Nationale Demütigung; Rechten als Propaganda-Grundlage</td>
-        </tr>
-        <tr>
-          <td><strong>Reparationen</strong></td>
-          <td>132 Milliarden Goldmark</td>
-          <td class="note">Wirtschaftliche Dauerbelastung, Mitursache der Inflation</td>
-        </tr>
-        <tr>
-          <td><strong>Gebiete</strong></td>
-          <td>Elsass-Lothringen, Posen, Danzig u. a.</td>
-          <td class="note">Nährboden für Nationalismus &amp; Revisionismus</td>
-        </tr>
-        <tr>
-          <td><strong>Militär</strong></td>
-          <td>Reichswehr max. 100.000 Mann</td>
-          <td class="note">Ressentiments im Militär; Dolchstoß-Legende</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Die Weimarer Verfassung (1919)</h3>
-    <p>Die Verfassung war für ihre Zeit fortschrittlich: allgemeines Wahlrecht (auch Frauen), Grundrechte, Parlamentarismus. Aber sie enthielt <strong>strukturelle Schwächen</strong>:</p>
-    <ul>
-      <li><strong>Verhältniswahlrecht</strong> → Splitterparteien, instabile Koalitionen, häufige Regierungswechsel</li>
-      <li><strong>Artikel 48</strong> (Notstandsparagraph) → Präsident kann per Dekret regieren, Umgehung des Parlaments – später von Hindenburg missbraucht</li>
-      <li><strong>Reichspräsident</strong> mit starker Machtstellung (Direktwahl, Ernennung des Reichskanzlers) – systemfremdes Element</li>
-    </ul>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Destabilisierende Faktoren</h3>
-    <div class="factor-grid">
-      <div class="factor-card destab">
-        <div class="factor-card-label">Wirtschaft</div>
-        <h4>Hyperinflation 1923</h4>
-        <p>Reparationszahlungen, Ruhrbesetzung durch Frankreich, Gelddrucken → 1 Dollar = 4,2 Billionen Mark. Mittelstand verlor Ersparnisse. Vertrauen in den Staat erschüttert.</p>
-      </div>
-      <div class="factor-card destab">
-        <div class="factor-card-label">Wirtschaft</div>
-        <h4>Weltwirtschaftskrise 1929</h4>
-        <p>„Schwarzer Freitag" Oktober 1929. US-Kredite werden abgezogen. Massenarbeitslosigkeit: 6 Millionen Arbeitslose bis 1932. Radikale Parteien gewinnen massiv.</p>
-      </div>
-      <div class="factor-card destab">
-        <div class="factor-card-label">Politik</div>
-        <h4>Politischer Extremismus</h4>
-        <p>KPD (links) und NSDAP (rechts) bekämpfen die Republik offen. Straßenschlachten, politische Morde (Rathenau 1922). SA-Terror gegen politische Gegner.</p>
-      </div>
-      <div class="factor-card destab">
-        <div class="factor-card-label">Legitimität</div>
-        <h4>Fehlende Akzeptanz</h4>
-        <p>Viele Eliten (Militär, Justiz, Großgrundbesitzer, Bürokratie) lehnten die Demokratie ab. „Republik ohne Republikaner" – kein stabiles demokratisches Fundament.</p>
-      </div>
-      <div class="factor-card destab">
-        <div class="factor-card-label">Putschversuche</div>
-        <h4>Staatsfeindliche Aktionen</h4>
-        <p>Kapp-Putsch 1920 (Rechte), Hitlerputsch 1923 (München), kommunistische Aufstände. Staat wirkte handlungsunfähig – Putschisten wurden kaum bestraft.</p>
-      </div>
-      <div class="factor-card destab">
-        <div class="factor-card-label">Verfassung</div>
-        <h4>Strukturelle Mängel</h4>
-        <p>Verhältniswahlrecht → 30+ Parteien, instabile Koalitionen. Art. 48 ermöglichte Präsidialdiktatur. Ab 1930 regiert Brüning per Notverordnung ohne Parlamentsmehrheit.</p>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Stabilisierende Faktoren</h3>
-    <div class="factor-grid">
-      <div class="factor-card stab">
-        <div class="factor-card-label">Wirtschaft</div>
-        <h4>Goldene Zwanziger (1924–29)</h4>
-        <p>Dawes-Plan 1924: US-Kredite stabilisieren die Wirtschaft. Wirtschaftsaufschwung, Vollbeschäftigung, kulturelle Blüte (Bauhaus, Weimarer Kultur). Parteien der Mitte gewinnen.</p>
-      </div>
-      <div class="factor-card stab">
-        <div class="factor-card-label">Diplomatie</div>
-        <h4>Außenpolitische Erfolge</h4>
-        <p>Stresemann: Locarno-Verträge 1925, Völkerbundbeitritt 1926. Deutschland kehrt in die Staatengemeinschaft zurück. Prestigegewinn für die Republik.</p>
-      </div>
-      <div class="factor-card stab">
-        <div class="factor-card-label">Währung</div>
-        <h4>Rentenmark 1923</h4>
-        <p>Einführung der Rentenmark beendet die Hyperinflation schlagartig. Finanzminister Schacht stabilisiert die Währung. Wirtschaftliches Fundament wieder hergestellt.</p>
-      </div>
-      <div class="factor-card stab">
-        <div class="factor-card-label">Verfassung</div>
-        <h4>Demokratische Institutionen</h4>
-        <p>Freie Presse, Gewerkschaften, Parteienvielfalt, Grundrechte. Reichstag als Debattenforum funktioniert. SPD und Zentrum als stabile demokratische Kräfte.</p>
-      </div>
-    </div>
-    <div class="merke">
-      <div class="merke-label">⚑ Merke: Kern-These</div>
-      <p>Die Weimarer Republik war dauerhaft instabil, weil sie von Anfang an von innen (Eliten ohne Demokratieverständnis) und außen (Versailles, Wirtschaftskrisen) unter Druck stand. Die <strong>stabilisierende Phase 1924–29</strong> war eine trügerische Ruhephase – die strukturellen Probleme blieben ungelöst.</p>
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <!-- TEIL 2: AUFSTIEG NSDAP -->
-
-  <div class="section">
-    <div class="section-header ns">
-      <div class="section-num">02</div>
-      <div>
-        <div class="section-title">Aufstieg des Nationalsozialismus</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Von der Splitterpartei zur Diktatur · 1919–1934</div>
-      </div>
-    </div>
-    <div class="section-body ns-body">
-
-```
-  <div class="subsection">
-    <h3>NS-Ideologie – Kernelemente</h3>
-    <p>Um zu verstehen, warum die NSDAP Erfolg hatte, muss man ihre Ideologie kennen:</p>
-    <div class="keyterms">
-      <span class="kt">Antisemitismus</span>
-      <span class="kt">Rassismus / „Volksgemeinschaft"</span>
-      <span class="kt">Lebensraum im Osten</span>
-      <span class="kt">Führerprinzip</span>
-      <span class="kt">Nationalismus / Revisionismus</span>
-      <span class="kt">Antimarxismus</span>
-      <span class="kt">Antidemokratismus</span>
-    </div>
-    <p>Hitler verband <strong>radikalen Antisemitismus</strong> mit <strong>nationalem Sendungsbewusstsein</strong>: Die Juden seien schuld an Kriegsniederlage, Inflation und Kommunismus. Das war eine einfache Erklärung für komplexe Probleme – und deshalb wirksam in der Krise.</p>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Chronologie des Aufstiegs</h3>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-year">1919–1923 · Frühphase</div>
-        <div class="tl-text">Hitler tritt der DAP bei (1919), benennt sie in <strong>NSDAP</strong> um. Aufbau der SA. Ideologie: Mein Kampf-Grundgedanken. <strong>Hitlerputsch November 1923</strong> scheitert – Hitler wird zu 5 Jahren verurteilt, kommt nach 9 Monaten frei.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1924–1929 · Stagnationsphase</div>
-        <div class="tl-text">Wirtschaftliche Stabilisierung schadet der NSDAP. Wahlergebnisse bei 2–3 %. Hitler nutzt die Zeit: Reorganisation der Partei, Aufbau von Parteistrukturen in ganz Deutschland, <strong>„Legalitätsstrategie"</strong> (keine Putsches mehr, Macht durch Wahlen).</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1929–1932 · Durchbruch durch die Krise</div>
-        <div class="tl-text">Weltwirtschaftskrise als Katalysator: <strong>September 1930: 18,3 %</strong> – NSDAP wird zweitstärkste Kraft. <strong>Juli 1932: 37,4 %</strong> – stärkste Partei. Massenmobilisierung, Wahlkampf mit modernen Mitteln (Flugzeug, Lautsprecher, Plakate, Propaganda durch Goebbels).</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">30. Januar 1933 · „Machtergreifung"</div>
-        <div class="tl-text">Reichspräsident Hindenburg ernennt Hitler zum Reichskanzler. Konservative Eliten glauben, ihn „einrahmen" zu können (<strong>von Papen: „den Hitler kann man einhegen"</strong>). Fatale Fehleinschätzung.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1933 · Machtkonsolidierung</div>
-        <div class="tl-text"><strong>Reichstagsbrand 27. Feb.</strong> → Notverordnung zum Schutz von Volk und Staat (Grundrechte außer Kraft). <strong>Ermächtigungsgesetz 23. März</strong>: Regierung kann ohne Reichstag Gesetze erlassen. <strong>Gleichschaltung</strong>: Länder, Parteien, Gewerkschaften werden aufgelöst/gleichgeschaltet. KPD und SPD verboten.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-year">1934 · Vollendung der Diktatur</div>
-        <div class="tl-text"><strong>„Röhm-Putsch" / Nacht der langen Messer (30. Juni 1934)</strong>: Hitler lässt SA-Führung ermorden – Ausschaltung eines internen Rivalen, Sicherung der Loyalität der Reichswehr. <strong>Tod Hindenburgs (August 1934)</strong>: Hitler vereint Kanzler- und Präsidentenamt → <strong>„Führer und Reichskanzler"</strong>. Wehrmacht schwört auf Hitler persönlich.</div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <!-- WAHLERGEBNISSE – Tabelle passt hier perfekt -->
-  <div class="subsection">
-    <h3>NSDAP-Wahlergebnisse im Überblick</h3>
-    <p class="table-caption">Reichstagswahlen – NSDAP-Stimmanteile direkt verknüpft mit der Wirtschaftslage</p>
-    <table class="data-table red-table">
-      <thead>
-        <tr><th>Wahl</th><th>Ergebnis</th><th style="width:140px;">Anteil</th><th>Wirtschaftlicher Kontext</th></tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="yr">Mai 1924</td>
-          <td class="pct">6,5 %</td>
-          <td><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:17%"></div></div></td>
-          <td class="note">Nach Hyperinflation – erste Kandidatur</td>
-        </tr>
-        <tr>
-          <td class="yr">Dez. 1924</td>
-          <td class="pct">3,0 %</td>
-          <td><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:8%"></div></div></td>
-          <td class="note">Stabilisierung → NSDAP verliert</td>
-        </tr>
-        <tr>
-          <td class="yr">Mai 1928</td>
-          <td class="pct">2,6 %</td>
-          <td><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:7%"></div></div></td>
-          <td class="note">Goldene Zwanziger – absolutes Tief</td>
-        </tr>
-        <tr>
-          <td class="yr">Sept. 1930</td>
-          <td class="pct">18,3 %</td>
-          <td><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:49%"></div></div></td>
-          <td class="note">Weltwirtschaftskrise → Durchbruch!</td>
-        </tr>
-        <tr>
-          <td class="yr">Juli 1932</td>
-          <td class="pct">37,4 %</td>
-          <td><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:100%"></div></div></td>
-          <td class="note">6 Mio. Arbeitslose – stärkste Partei</td>
-        </tr>
-        <tr>
-          <td class="yr">Nov. 1932</td>
-          <td class="pct">33,1 %</td>
-          <td><div class="mini-bar-bg"><div class="mini-bar-fill" style="width:89%"></div></div></td>
-          <td class="note">Leichter Rückgang – dennoch Kanzler Jan. 1933</td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="highlight red">
-      <strong>Schlüsselerkenntnis:</strong> 2,6 % (1928) → 37,4 % (1932) in nur 4 Jahren. Ohne die Weltwirtschaftskrise wäre Hitler nie Kanzler geworden.
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Gründe für den Aufstieg der NSDAP</h3>
-    <p><strong>1. Wirtschaftliche Krisen</strong> – Hyperinflation und vor allem die Weltwirtschaftskrise 1929 erzeugten Massenarmut und Verzweiflung. Wer nichts mehr zu verlieren hatte, wählte radikal.</p>
-    <p><strong>2. Versagen der demokratischen Parteien</strong> – Die Weimarer Koalitionen konnten die Krise nicht lösen. Brüning regierte per Notverordnung, der Reichstag tagte kaum noch. Das Vertrauen in die Demokratie schwand.</p>
-    <p><strong>3. Propaganda &amp; Charisma Hitlers</strong> – Goebbels' Propaganda-Maschinerie war hochmodern. Hitler trat als „Retter" auf, der einfache Antworten auf komplexe Probleme gab. Emotionale Massenveranstaltungen (Nürnberger Parteitage).</p>
-    <p><strong>4. Fehleinschätzung der Eliten</strong> – Reichswehr, Großindustrielle, Adel und Konservative unterschätzten Hitler und unterstützten ihn als Werkzeug gegen die Linke. Von Papen arrangierte die Ernennung Hitlers zum Kanzler.</p>
-    <p><strong>5. Schwäche des Staates</strong> – Polizei und Justiz gingen kaum gegen NS-Terror vor. SA-Schlägertrupps operierten fast ungestört. Der Staat zeigte gegenüber der Rechten Milde, gegenüber der Linken Härte.</p>
-    <div class="highlight red">
-      <strong>Wichtig:</strong> Der Aufstieg der NSDAP war kein „Betriebsunfall" – er war das Ergebnis des Zusammenwirkens von Krisenbelastung, strukturellen Demokratiemängeln, Propaganda und dem Versagen der demokratischen Kräfte. Hitler wurde nicht <em>gewählt</em>, er wurde ernannt – aber mit massiver Volksunterstützung.
-    </div>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <!-- TEIL 3: ZUSAMMENHÄNGE -->
-
-  <div class="section">
-    <div class="section-header zusammenhang">
-      <div class="section-num">03</div>
-      <div>
-        <div class="section-title">Zusammenhänge &amp; Kausalitäten</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Wie hängen Weimarer Republik und NS-Aufstieg zusammen?</div>
-      </div>
-    </div>
-    <div class="section-body zusammen-body">
-
-```
-  <div class="subsection">
-    <h3>Die Kausalkette: Vom Kaiserreich zur Diktatur</h3>
-    <div class="chain">
-      <span class="chain-item">WK I Niederlage 1918</span>
-      <span class="chain-arrow">→</span>
-      <span class="chain-item">Versailler Vertrag</span>
-      <span class="chain-arrow">→</span>
-      <span class="chain-item">Wirtschaftskrise + Demütigung</span>
-      <span class="chain-arrow">→</span>
-      <span class="chain-item">Instabile Demokratie</span>
-      <span class="chain-arrow">→</span>
-      <span class="chain-item">Radikalisierung</span>
-      <span class="chain-arrow">→</span>
-      <span class="chain-item">NS-Aufstieg</span>
-      <span class="chain-arrow">→</span>
-      <span class="chain-item">Diktatur 1933/34</span>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Drei zentrale Zusammenhänge für die Klausur</h3>
-    <p><strong>① Versailles als Dauerhypothek:</strong> Der Versailler Vertrag (1919) schwächte die Republik wirtschaftlich (Reparationen), politisch (Kriegsschuldlüge) und psychologisch (nationale Demütigung). Die NSDAP nutzte den Revisions-Wunsch als Kernversprechen: „Deutschland wieder groß machen."</p>
-    <p><strong>② Wirtschaftskrise als Katalysator:</strong> Ohne die Weltwirtschaftskrise 1929 wäre Hitler nie Kanzler geworden. 1928 lag die NSDAP bei 2,6 %. Die Massenarbeitslosigkeit trieb Millionen in die Arme der Extremen. Wirtschaftliche Not und politischer Radikalismus sind direkt verknüpft.</p>
-    <p><strong>③ Institutionelles Versagen als Ermöglichungsfaktor:</strong> Die Fehlkonstruktionen der Weimarer Verfassung (Art. 48, Verhältniswahlrecht) wurden von Hitler genutzt. Das Ermächtigungsgesetz war formal legal. Die Demokratie wurde mit demokratischen Mitteln zerstört.</p>
-    <div class="highlight green">
-      <strong>Übergreifende These:</strong> Die Weimarer Republik scheiterte nicht, weil Demokratie als System versagt hätte, sondern weil sie in einer Gesellschaft eingeführt wurde, die demokratische Werte noch nicht verinnerlicht hatte, und unter katastrophalen wirtschaftlichen Bedingungen kämpfen musste.
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <div class="subsection">
-    <h3>Historikerstreit: War das alles zwangsläufig?</h3>
-    <p><strong>Intentionalisten</strong> betonen Hitlers langfristigen Plan und ideologische Absicht als entscheidend.</p>
-    <p><strong>Strukturalisten / Funktionalisten</strong> betonen, dass die Strukturen der Weimarer Republik und der Weltkrieg die eigentlichen Ursachen waren – Hitler war auch Ergebnis von Umständen.</p>
-    <p>Für die Klausur wichtig: <strong>Multikausale Erklärung</strong> – kein Einzelfaktor reicht aus. Die Kombination aus Strukturschwäche, Krise, Propaganda und Elitenversagen erklärt den NS-Aufstieg.</p>
-  </div>
-
-</div>
-```
-
-  </div>
-
-  <!-- KLAUSUR-TIPPS -->
-
-  <div class="section">
-    <div class="section-header" style="background:rgba(201,168,76,0.05);">
-      <div class="section-num" style="color:var(--gold);opacity:0.35;">04</div>
-      <div>
-        <div class="section-title" style="color:var(--gold-light);">Klausur-Strategie · 11–12 Punkte</div>
-        <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem;">Was Korrektoren sehen wollen</div>
-      </div>
-    </div>
-    <div class="section-body">
-      <div class="subsection">
-        <h3 style="color:var(--gold);border-color:rgba(201,168,76,0.2);">Operatoren &amp; Anforderungen</h3>
-        <ul>
-          <li><strong>Analysieren / Erklären:</strong> Ursache-Wirkungs-Ketten darstellen, nicht nur aufzählen. „X führte zu Y, weil…"</li>
-          <li><strong>Beurteilen / Bewerten:</strong> Eigene begründete These + Gegenargument + Abwägung. Kein Absolutismus.</li>
-          <li><strong>Beschreiben:</strong> Fachbegriffe benutzen, Belege nennen (Jahreszahlen, Gesetze, Namen).</li>
-        </ul>
-      </div>
-      <div class="subsection">
-        <h3 style="color:var(--gold);border-color:rgba(201,168,76,0.2);">Must-Have Fakten für die Klausur</h3>
-        <div class="keyterms">
-          <span class="kt">9. Nov. 1918 – Republik ausgerufen</span>
-          <span class="kt">Versailler Vertrag 1919 / §231</span>
-          <span class="kt">Hyperinflation 1923</span>
-          <span class="kt">Dawes-Plan 1924</span>
-          <span class="kt">Hitlerputsch 1923</span>
-          <span class="kt">Weltwirtschaftskrise 1929</span>
-          <span class="kt">NSDAP 37,4 % – Juli 1932</span>
-          <span class="kt">30. Jan. 1933 – Hitler Kanzler</span>
-          <span class="kt">Reichstagsbrand 27. Feb. 1933</span>
-          <span class="kt">Ermächtigungsgesetz 23. März 1933</span>
-          <span class="kt">Nacht der langen Messer – 30. Juni 1934</span>
-          <span class="kt">Hindenburg Tod Aug. 1934 → Führer</span>
-          <span class="kt">Artikel 48 – Notstandsparagraph</span>
-          <span class="kt">Gleichschaltung 1933</span>
-        </div>
-      </div>
-      <div class="merke">
-        <div class="merke-label">⚑ Goldene Regel</div>
-        <p>Nie isoliert aufzählen – immer <strong>verknüpfen</strong>: Warum? Folge? Zusammenhang mit dem anderen Thema? Ein Satz mit Kausalität zählt mehr als drei Sätze reine Fakten.</p>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    Lernzettel erstellt zur Klausurvorbereitung · Weimarer Republik &amp; NS-Aufstieg 1918–1934
-  </footer>
-
-</div>
-
-<script>
-  const TOPICS = [
-    { id: 'gruendung',   label: 'Entstehung & Gründungskrise 1918/19' },
-    { id: 'versailles',  label: 'Versailler Vertrag & seine 4 Folgen' },
-    { id: 'verfassung',  label: 'Weimarer Verfassung & Schwächen (Art. 48)' },
-    { id: 'destab',      label: 'Alle 6 destabilisierenden Faktoren' },
-    { id: 'stab',        label: 'Alle 4 stabilisierenden Faktoren' },
-    { id: 'inflation',   label: 'Hyperinflation 1923 erklären können' },
-    { id: 'wk29',        label: 'Weltwirtschaftskrise 1929 & Folgen' },
-    { id: 'dawes',       label: 'Dawes-Plan & Goldene Zwanziger' },
-    { id: 'ideologie',   label: 'NS-Ideologie – alle 7 Kernelemente' },
-    { id: 'phasen',      label: 'Aufstieg in 4 Phasen (1919–1934)' },
-    { id: 'wahlen',      label: 'NSDAP-Wahlergebnisse & Wirtschaftsbezug' },
-    { id: 'machtergrfg', label: '30. Jan. 1933 – Machtergreifung & Eliten' },
-    { id: 'ermacht',     label: 'Ermächtigungsgesetz & Gleichschaltung' },
-    { id: 'roehm',       label: 'Nacht der langen Messer & Führerstaat 1934' },
-    { id: 'gruende5',    label: 'Die 5 Aufstiegsgründe der NSDAP' },
-    { id: 'kausalkette', label: 'Kausalkette Kaiserreich → Diktatur' },
-    { id: 'zusammen3',   label: '3 zentrale Zusammenhänge für die Klausur' },
-    { id: 'historiker',  label: 'Historikerstreit: Intent. vs. Strukt.' },
-    { id: 'operatoren',  label: 'Operatoren kennen (analysieren, bewerten…)' },
-    { id: 'mustfakten',  label: 'Alle 14 Must-Have-Fakten auswendig' },
-  ];
-
-  const KEY = 'lernzettel_v2';
-
-  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } };
-  const save = s  => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch {} };
-
-  function refresh() {
-    const boxes = document.querySelectorAll('.tc input[type="checkbox"]');
-    const total = boxes.length, done = [...boxes].filter(b => b.checked).length;
-    const pct = total ? Math.round(done / total * 100) : 0;
-    document.getElementById('pwFill').style.width = pct + '%';
-    document.getElementById('pwPct').textContent  = pct + ' %';
-    const s = document.getElementById('pwSummary');
-    if      (pct === 0)   s.textContent = 'Hake ab, was du sicher beherrschst.';
-    else if (pct < 30)    s.textContent = `${done} / ${total} ✓ – Guter Start, weitermachen!`;
-    else if (pct < 60)    s.textContent = `${done} / ${total} ✓ – Solider Fortschritt, bleib dran!`;
-    else if (pct < 85)    s.textContent = `${done} / ${total} ✓ – Du bist auf einem sehr guten Weg!`;
-    else if (pct < 100)   s.textContent = `${done} / ${total} ✓ – Fast fertig, noch den letzten Schliff!`;
-    else                  s.textContent = `Alle ${total} Themen ✓ – Du bist bereit für die Klausur! 🏆`;
-  }
-
-  function build() {
-    const state = load();
-    const container = document.getElementById('pwTopics');
-    container.innerHTML = '';
-    TOPICS.forEach(t => {
-      const checked = !!state[t.id];
-      const lbl = document.createElement('label');
-      lbl.className = 'tc' + (checked ? ' done' : '');
-
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.checked = checked;
-      cb.addEventListener('change', () => {
-        const s = load(); s[t.id] = cb.checked; save(s);
-        lbl.classList.toggle('done', cb.checked);
-        refresh();
-      });
-
-      const span = document.createElement('span');
-      span.className = 'tc-label';
-      span.textContent = t.label;
-
-      lbl.appendChild(cb);
-      lbl.appendChild(span);
-      container.appendChild(lbl);
-    });
-    refresh();
-  }
-
-  function resetProgress() {
-    if (!confirm('Lernfortschritt wirklich zurücksetzen?')) return;
-    try { localStorage.removeItem(KEY); } catch {}
-    build();
-  }
-
-  build();
-</script>
-
-</body>
-</html>
+LERNZETTEL · GESCHICHTE · KLAUSUR
+Weimarer Republik & Aufstieg des Nationalsozialismus
+
+Stabilisierende & destabilisierende Faktoren 1918–1934 · Ziel: 11–12 Punkte
+⚑ Mein Lernfortschritt
+
+0 %
+Zurücksetzen
+Hake ab, was du sicher beherrschst.
+01
+Die Weimarer Republik (1918–1933)
+Stabilisierende & destabilisierende Faktoren
+Entstehung & Gründungskrise (1918/19)
+Das Deutsche Kaiserreich verlor den Ersten Weltkrieg. Am 9. November 1918 dankte Kaiser Wilhelm II. ab – Philipp Scheidemann rief die Republik aus. Damit entstand die Weimarer Republik unter denkbar schlechten Vorzeichen: Kriegsniederlage, wirtschaftliche Not und politisches Chaos prägten die Gründungsphase.
+„Novemberverbrecher"-Mythos: Konservative und Militärs schufen die Legende, die Republik sei durch einen „Dolchstoß" aus dem Innern entstanden – nicht durch militärische Niederlage. Das belastete die Republik von Anfang an und lieferte der Rechten dauerhaft Propaganda-Material.
+Die neue Regierung unter Friedrich Ebert (SPD) schloss den Versailler Vertrag (1919) – eine schwere Hypothek für die junge Demokratie:
+Versailler Vertrag 1919 – die vier zentralen Bestimmungen
+Bereich
+Konkrete Regelung
+Folge für die Republik
+Kriegsschuld
+§ 231 – Deutschland allein schuldig
+Nationale Demütigung; Rechten als Propaganda-Grundlage
+Reparationen
+132 Milliarden Goldmark
+Wirtschaftliche Dauerbelastung, Mitursache der Inflation
+Gebiete
+Elsass-Lothringen, Posen, Danzig u. a.
+Nährboden für Nationalismus & Revisionismus
+Militär
+Reichswehr max. 100.000 Mann
+Ressentiments im Militär; Dolchstoß-Legende
+
+Die Weimarer Verfassung (1919)
+Die Verfassung war für ihre Zeit fortschrittlich: allgemeines Wahlrecht (auch Frauen), Grundrechte, Parlamentarismus. Aber sie enthielt strukturelle Schwächen:
+	•	Verhältniswahlrecht → Splitterparteien, instabile Koalitionen, häufige Regierungswechsel
+	•	Artikel 48 (Notstandsparagraph) → Präsident kann per Dekret regieren, Umgehung des Parlaments – später von Hindenburg missbraucht
+	•	Reichspräsident mit starker Machtstellung (Direktwahl, Ernennung des Reichskanzlers) – systemfremdes Element
+
+Destabilisierende Faktoren
+WIRTSCHAFT
+Hyperinflation 1923
+Reparationszahlungen, Ruhrbesetzung durch Frankreich, Gelddrucken → 1 Dollar = 4,2 Billionen Mark. Mittelstand verlor Ersparnisse. Vertrauen in den Staat erschüttert.
+WIRTSCHAFT
+Weltwirtschaftskrise 1929
+„Schwarzer Freitag" Oktober 1929. US-Kredite werden abgezogen. Massenarbeitslosigkeit: 6 Millionen Arbeitslose bis 1932. Radikale Parteien gewinnen massiv.
+POLITIK
+Politischer Extremismus
+KPD (links) und NSDAP (rechts) bekämpfen die Republik offen. Straßenschlachten, politische Morde (Rathenau 1922). SA-Terror gegen politische Gegner.
+LEGITIMITÄT
+Fehlende Akzeptanz
+Viele Eliten (Militär, Justiz, Großgrundbesitzer, Bürokratie) lehnten die Demokratie ab. „Republik ohne Republikaner" – kein stabiles demokratisches Fundament.
+PUTSCHVERSUCHE
+Staatsfeindliche Aktionen
+Kapp-Putsch 1920 (Rechte), Hitlerputsch 1923 (München), kommunistische Aufstände. Staat wirkte handlungsunfähig – Putschisten wurden kaum bestraft.
+VERFASSUNG
+Strukturelle Mängel
+Verhältniswahlrecht → 30+ Parteien, instabile Koalitionen. Art. 48 ermöglichte Präsidialdiktatur. Ab 1930 regiert Brüning per Notverordnung ohne Parlamentsmehrheit.
+
+Stabilisierende Faktoren
+WIRTSCHAFT
+Goldene Zwanziger (1924–29)
+Dawes-Plan 1924: US-Kredite stabilisieren die Wirtschaft. Wirtschaftsaufschwung, Vollbeschäftigung, kulturelle Blüte (Bauhaus, Weimarer Kultur). Parteien der Mitte gewinnen.
+DIPLOMATIE
+Außenpolitische Erfolge
+Stresemann: Locarno-Verträge 1925, Völkerbundbeitritt 1926. Deutschland kehrt in die Staatengemeinschaft zurück. Prestigegewinn für die Republik.
+WÄHRUNG
+Rentenmark 1923
+Einführung der Rentenmark beendet die Hyperinflation schlagartig. Finanzminister Schacht stabilisiert die Währung. Wirtschaftliches Fundament wieder hergestellt.
+VERFASSUNG
+Demokratische Institutionen
+Freie Presse, Gewerkschaften, Parteienvielfalt, Grundrechte. Reichstag als Debattenforum funktioniert. SPD und Zentrum als stabile demokratische Kräfte.
+⚑ MERKE: KERN-THESE
+Die Weimarer Republik war dauerhaft instabil, weil sie von Anfang an von innen (Eliten ohne Demokratieverständnis) und außen (Versailles, Wirtschaftskrisen) unter Druck stand. Die stabilisierende Phase 1924–29 war eine trügerische Ruhephase – die strukturellen Probleme blieben ungelöst.
+02
+Aufstieg des Nationalsozialismus
+Von der Splitterpartei zur Diktatur · 1919–1934
+NS-Ideologie – Kernelemente
+Um zu verstehen, warum die NSDAP Erfolg hatte, muss man ihre Ideologie kennen:
+Antisemitismus
+Rassismus / „Volksgemeinschaft"
+Lebensraum im Osten
+Führerprinzip
+Nationalismus / Revisionismus
+Antimarxismus
+Antidemokratismus
+Hitler verband radikalen Antisemitismus mit nationalem Sendungsbewusstsein: Die Juden seien schuld an Kriegsniederlage, Inflation und Kommunismus. Das war eine einfache Erklärung für komplexe Probleme – und deshalb wirksam in der Krise.
+
+Chronologie des Aufstiegs
+1919–1923 · Frühphase
+Hitler tritt der DAP bei (1919), benennt sie in NSDAP um. Aufbau der SA. Ideologie: Mein Kampf-Grundgedanken. Hitlerputsch November 1923 scheitert – Hitler wird zu 5 Jahren verurteilt, kommt nach 9 Monaten frei.
+1924–1929 · Stagnationsphase
+Wirtschaftliche Stabilisierung schadet der NSDAP. Wahlergebnisse bei 2–3 %. Hitler nutzt die Zeit: Reorganisation der Partei, Aufbau von Parteistrukturen in ganz Deutschland, „Legalitätsstrategie" (keine Putsches mehr, Macht durch Wahlen).
+1929–1932 · Durchbruch durch die Krise
+Weltwirtschaftskrise als Katalysator: September 1930: 18,3 % – NSDAP wird zweitstärkste Kraft. Juli 1932: 37,4 % – stärkste Partei. Massenmobilisierung, Wahlkampf mit modernen Mitteln (Flugzeug, Lautsprecher, Plakate, Propaganda durch Goebbels).
+30. Januar 1933 · „Machtergreifung"
+Reichspräsident Hindenburg ernennt Hitler zum Reichskanzler. Konservative Eliten glauben, ihn „einrahmen" zu können (von Papen: „den Hitler kann man einhegen"). Fatale Fehleinschätzung.
+1933 · Machtkonsolidierung
+Reichstagsbrand 27. Feb. → Notverordnung zum Schutz von Volk und Staat (Grundrechte außer Kraft). Ermächtigungsgesetz 23. März: Regierung kann ohne Reichstag Gesetze erlassen. Gleichschaltung: Länder, Parteien, Gewerkschaften werden aufgelöst/gleichgeschaltet. KPD und SPD verboten.
+1934 · Vollendung der Diktatur
+„Röhm-Putsch" / Nacht der langen Messer (30. Juni 1934): Hitler lässt SA-Führung ermorden – Ausschaltung eines internen Rivalen, Sicherung der Loyalität der Reichswehr. Tod Hindenburgs (August 1934): Hitler vereint Kanzler- und Präsidentenamt → „Führer und Reichskanzler". Wehrmacht schwört auf Hitler persönlich.
+
+NSDAP-Wahlergebnisse im Überblick
+Reichstagswahlen – NSDAP-Stimmanteile direkt verknüpft mit der Wirtschaftslage
+Wahl
+Ergebnis
+Anteil
+Wirtschaftlicher Kontext
+Mai 1924
+6,5 %
+
+Nach Hyperinflation – erste Kandidatur
+Dez. 1924
+3,0 %
+
+Stabilisierung → NSDAP verliert
+Mai 1928
+2,6 %
+
+Goldene Zwanziger – absolutes Tief
+Sept. 1930
+18,3 %
+
+Weltwirtschaftskrise → Durchbruch!
+Juli 1932
+37,4 %
+
+6 Mio. Arbeitslose – stärkste Partei
+Nov. 1932
+33,1 %
+
+Leichter Rückgang – dennoch Kanzler Jan. 1933
+Schlüsselerkenntnis: 2,6 % (1928) → 37,4 % (1932) in nur 4 Jahren. Ohne die Weltwirtschaftskrise wäre Hitler nie Kanzler geworden.
+
+Gründe für den Aufstieg der NSDAP
+1. Wirtschaftliche Krisen – Hyperinflation und vor allem die Weltwirtschaftskrise 1929 erzeugten Massenarmut und Verzweiflung. Wer nichts mehr zu verlieren hatte, wählte radikal.
+2. Versagen der demokratischen Parteien – Die Weimarer Koalitionen konnten die Krise nicht lösen. Brüning regierte per Notverordnung, der Reichstag tagte kaum noch. Das Vertrauen in die Demokratie schwand.
+3. Propaganda & Charisma Hitlers – Goebbels' Propaganda-Maschinerie war hochmodern. Hitler trat als „Retter" auf, der einfache Antworten auf komplexe Probleme gab. Emotionale Massenveranstaltungen (Nürnberger Parteitage).
+4. Fehleinschätzung der Eliten – Reichswehr, Großindustrielle, Adel und Konservative unterschätzten Hitler und unterstützten ihn als Werkzeug gegen die Linke. Von Papen arrangierte die Ernennung Hitlers zum Kanzler.
+5. Schwäche des Staates – Polizei und Justiz gingen kaum gegen NS-Terror vor. SA-Schlägertrupps operierten fast ungestört. Der Staat zeigte gegenüber der Rechten Milde, gegenüber der Linken Härte.
+Wichtig: Der Aufstieg der NSDAP war kein „Betriebsunfall" – er war das Ergebnis des Zusammenwirkens von Krisenbelastung, strukturellen Demokratiemängeln, Propaganda und dem Versagen der demokratischen Kräfte. Hitler wurde nicht gewählt, er wurde ernannt – aber mit massiver Volksunterstützung.
+03
+Zusammenhänge & Kausalitäten
+Wie hängen Weimarer Republik und NS-Aufstieg zusammen?
+Die Kausalkette: Vom Kaiserreich zur Diktatur
+WK I Niederlage 1918
+→
+Versailler Vertrag
+→
+Wirtschaftskrise + Demütigung
+→
+Instabile Demokratie
+→
+Radikalisierung
+→
+NS-Aufstieg
+→
+Diktatur 1933/34
+
+Drei zentrale Zusammenhänge für die Klausur
+① Versailles als Dauerhypothek: Der Versailler Vertrag (1919) schwächte die Republik wirtschaftlich (Reparationen), politisch (Kriegsschuldlüge) und psychologisch (nationale Demütigung). Die NSDAP nutzte den Revisions-Wunsch als Kernversprechen: „Deutschland wieder groß machen."
+② Wirtschaftskrise als Katalysator: Ohne die Weltwirtschaftskrise 1929 wäre Hitler nie Kanzler geworden. 1928 lag die NSDAP bei 2,6 %. Die Massenarbeitslosigkeit trieb Millionen in die Arme der Extremen. Wirtschaftliche Not und politischer Radikalismus sind direkt verknüpft.
+③ Institutionelles Versagen als Ermöglichungsfaktor: Die Fehlkonstruktionen der Weimarer Verfassung (Art. 48, Verhältniswahlrecht) wurden von Hitler genutzt. Das Ermächtigungsgesetz war formal legal. Die Demokratie wurde mit demokratischen Mitteln zerstört.
+Übergreifende These: Die Weimarer Republik scheiterte nicht, weil Demokratie als System versagt hätte, sondern weil sie in einer Gesellschaft eingeführt wurde, die demokratische Werte noch nicht verinnerlicht hatte, und unter katastrophalen wirtschaftlichen Bedingungen kämpfen musste.
+
+Historikerstreit: War das alles zwangsläufig?
+Intentionalisten betonen Hitlers langfristigen Plan und ideologische Absicht als entscheidend.
+Strukturalisten / Funktionalisten betonen, dass die Strukturen der Weimarer Republik und der Weltkrieg die eigentlichen Ursachen waren – Hitler war auch Ergebnis von Umständen.
+Für die Klausur wichtig: Multikausale Erklärung – kein Einzelfaktor reicht aus. Die Kombination aus Strukturschwäche, Krise, Propaganda und Elitenversagen erklärt den NS-Aufstieg.
+04
+Klausur-Strategie · 11–12 Punkte
+Was Korrektoren sehen wollen
+Operatoren & Anforderungen
+	•	Analysieren / Erklären: Ursache-Wirkungs-Ketten darstellen, nicht nur aufzählen. „X führte zu Y, weil…"
+	•	Beurteilen / Bewerten: Eigene begründete These + Gegenargument + Abwägung. Kein Absolutismus.
+	•	Beschreiben: Fachbegriffe benutzen, Belege nennen (Jahreszahlen, Gesetze, Namen).
+Must-Have Fakten für die Klausur
+9. Nov. 1918 – Republik ausgerufen
+Versailler Vertrag 1919 / §231
+Hyperinflation 1923
+Dawes-Plan 1924
+Hitlerputsch 1923
+Weltwirtschaftskrise 1929
+NSDAP 37,4 % – Juli 1932
+30. Jan. 1933 – Hitler Kanzler
+Reichstagsbrand 27. Feb. 1933
+Ermächtigungsgesetz 23. März 1933
+Nacht der langen Messer – 30. Juni 1934
+Hindenburg Tod Aug. 1934 → Führer
+Artikel 48 – Notstandsparagraph
+Gleichschaltung 1933
+⚑ GOLDENE REGEL
+Nie isoliert aufzählen – immer verknüpfen: Warum? Folge? Zusammenhang mit dem anderen Thema? Ein Satz mit Kausalität zählt mehr als drei Sätze reine Fakten.
+Lernzettel erstellt zur Klausurvorbereitung · Weimarer Republik & NS-Aufstieg 1918–1934
